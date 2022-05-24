@@ -16,6 +16,7 @@ window.addEventListener('DOMContentLoaded',(event) =>{
       }
       try{
         (new EmployeePayrollData()).name = name.value;
+        textError.textContent = "";
       }
       catch(ex){
         textError.textContent = ex;
