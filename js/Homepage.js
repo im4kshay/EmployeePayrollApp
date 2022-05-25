@@ -31,8 +31,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
           <td>${empPayrollData._salary}</td>
           <td>${empPayrollData._startDate}</td>
           <td>
-          <img name="${empPayrollData._id}" onclick="remove(this)" src="../assets/Icons/delete-black-18dp.svg" alt="delete">
-          <img name="${empPayrollData._id}" onclick="update(this)" src="../assets/Icons/create-black-18dp.svg" alt="edit">
+          <img name="${empPayrollData._name}" onclick="remove(this)" src="../assets/Icons/delete-black-18dp.svg" alt="delete">
+          <img name="${empPayrollData._name}" onclick="update(this)" src="../assets/Icons/create-black-18dp.svg" alt="edit">
           </td>
         </tr>  
       `;
@@ -46,4 +46,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
       deptHtml = `${deptHtml} <div class='dept-label'>${dept}</div>`
     }
     return deptHtml;
+  }
+  //uc20 delete employee
+  const remove = (node) => {
+    let empPayrollData = empPayrollList.find(empData => empData._name == node.name);
+    if( !empPayrollData ) return;
+    const index = empPayrollList
+                    .map( empData => empData._name )
+                    .indexOf(empPayrollData._name);
+    empPayrollList.splice(index, 1);
+    localStorage.setItem("empPayrollList", JSON.stringify(empPayrollList));
+    document.querySelector(".emp-count").textContent = empPayrollList.length;
+    createInnerHtml();
   }
